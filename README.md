@@ -1,6 +1,44 @@
 # Job Hunt Orchestrator 🚀
 
-An autonomous, multi-agent AI application engineered to scale and accelerate the job search in the **GenAI / Agentic Systems** engineering market across **India (Pune GCCs)** and the **UAE (Dubai boutique agencies)**.
+[![Python 3.12](https://img.shields.io/badge/Python-3.12-blue.svg)](https://www.python.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.110+-009688.svg)](https://fastapi.tiangolo.com/)
+[![Playwright](https://img.shields.io/badge/Playwright-Stealth-green.svg)](https://playwright.dev/)
+[![LangGraph](https://img.shields.io/badge/LangGraph-Multi--Agent-orange.svg)](https://github.com/langchain-ai/langgraph)
+[![Tailwind CSS](https://img.shields.io/badge/TailwindCSS-v3.0-38bdf8.svg)](https://tailwindcss.com/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+An enterprise-grade, autonomous, multi-agent AI command center and web application engineered to scale and automate the job application pipeline in the **GenAI / Autonomous Agent / LLM Systems** engineering market across **India (Pune GCCs & Tech Hubs)** and the **UAE (Dubai & Abu Dhabi)**.
+
+---
+
+## 🌟 Key Highlights & Core Capabilities
+
+- **🌐 Multi-Portal Autonomous Job Application Engine:**
+  - **Naukri.com:** Search scraper, automated Easy Apply, and Path 3 external ATS redirection handling.
+  - **Bayt.com:** Gulf-focused algorithmic freshness engine and automated application sequencing.
+  - **Indeed:** Headless session restoration, Easy Apply sequence, and external portal redirect navigation.
+  - **Cutshort:** Indian high-signal startup auto-apply engine with profile sync.
+  - **Wellfound (AngelList):** Startup & global remote auto-apply with compensation filtering.
+- **⚡ Path 3 Adaptive External ATS Engine:**
+  - Seamlessly handles external redirects from job boards into **Workday (`myworkdayjobs.com`)**, **Lever**, **Greenhouse**, and custom proprietary company ATS portals.
+  - Automatic input matching (Full Name, Phone, Email, Experience, Notice Period, Current & Expected CTC, Residency status, Relocation readiness).
+  - Handles multi-step form pagination, file upload triggers, and interactive modal dialogs.
+- **🔐 Dedicated SSO Hub & Browser Session Persistence:**
+  - Standalone desktop login launchers (`login_naukri_sso.bat`, `login_bayt_sso.bat`) using native Microsoft Edge / Chrome in separate user data directories.
+  - One-time human OTP/2FA solve with automated cookie/storage persistence into `sessions/`.
+  - Real-time SSO health status indicators in the UI dashboard.
+- **💻 Real-Time Glassmorphism Web Command Center:**
+  - Served via **FastAPI** with Tailwind CSS glassmorphism UI, FontAwesome iconography, and live event polling.
+  - **Live Mode vs. Safe Dry Run:** Instant toggle to preview and audit applications with proof screenshots without submitting, or execute live applications.
+  - **Interactive Ledger Management:** Filter, sort, view high-res proof screenshots, and perform single-row or bulk deletion (`Delete Selected (N)`) with master checkboxes.
+  - **Failed Application Recovery:** One-click `"Retry Failed Applications"` engine with automated deduplication.
+  - **Candidate Profile & Resume Vault:** Live candidate profile editor and drag-and-drop persistent PDF resume uploader (`data/resumes/candidate_resume.pdf`).
+  - **Human-in-the-Loop Modal:** Catches unknown portal screening questions and saves verified candidate answers to persistent memory.
+- **📱 Remote Mobile Command Center:**
+  - One-click script (`start_mobile_orchestrator.bat` / `start_mobile_service.ps1`) spins up a secure Cloudflare Tunnel (`trycloudflare.com`) on `0.0.0.0:8000`.
+  - Automatically displays local Wi-Fi URLs and generates a terminal QR Code for instant mobile smartphone access without router port-forwarding.
+- **🧠 4-Tier Zero-Crash LLM Router:**
+  - Automated fallback routing: **Tier 1 (Local Ollama Llama 3)** $\rightarrow$ **Tier 2 (Groq Cloud Llama 3.3 70B)** $\rightarrow$ **Tier 3 (Google Gemini 1.5/2.0 Flash)** $\rightarrow$ **Tier 4 (Deterministic Heuristic Rules)**.
 
 ---
 
@@ -8,65 +46,103 @@ An autonomous, multi-agent AI application engineered to scale and accelerate the
 
 ```text
 Job Hunt Orchestrator
-├── config/                     # Settings (Pydantic), environment validation, timezones
-├── data/
-│   ├── profile_data.json       # Ground-truth candidate profile, anchor projects & metrics
+├── config/                     # Settings (Pydantic), environment validation, path resolver
+├── data/                       # Application data & persistent storage
+│   ├── candidate_profile.example.json # Public candidate profile template (credentials, preferences, compensation)
 │   ├── templates/              # ATS-compliant base Markdown resume & CSS stylesheet
-│   ├── generated_resumes/      # Dynamically tailored Markdown, HTML, and PDF resumes
-│   ├── drafts/                 # Saved cold outreach emails (.eml and metadata)
-│   └── chroma_db/              # Vector database for JD chunking & RAG
+│   └── mock_ats_portal.html    # Local mock ATS test environment
 ├── logs/                       # Rotating application logs & proof screenshots (.png)
 ├── sessions/                   # Persisted Playwright storage states (cookies/auth)
 ├── src/
-│   ├── core/                   # Loggers, security, webhook dispatcher
-│   ├── automation/             # Playwright browser engine & portal bots
+│   ├── api/                    # FastAPI web server, routes, and glassmorphism UI
+│   │   ├── main.py             # FastAPI application, background workers, REST endpoints
+│   │   └── templates/
+│   │       └── index.html      # Responsive Single-Page Command Center dashboard
+│   ├── automation/             # Playwright browser engines, scrapers, and cron orchestrators
 │   │   ├── browser_factory.py  # Stealth browser context & session manager
+│   │   ├── ats_engine.py       # Adaptive ATS & Workday external form engine
+│   │   ├── portal_apply_engine.py # Multi-portal apply coordinator (Indeed, Cutshort, Wellfound)
+│   │   ├── naukri_apply_engine.py # Naukri.com auto-apply & external redirect handler
 │   │   ├── freshness_cron.py   # Module 1: Algorithmic Freshness (Naukri & Bayt)
-│   │   ├── workday_engine.py   # Module 5: Workday auto-apply engine
-│   │   ├── ats_engine.py       # Module 5: Lever/Greenhouse form engine
-│   │   └── auto_apply_orchestrator.py # Module 5: Unified auto-apply runner
+│   │   ├── hourly_apply_cron.py# Scheduled autonomous application batch runner
+│   │   ├── sso_manager.py      # SSO session verification & interactive browser launcher
+│   │   ├── cutshort_scraper.py # Cutshort job scraper & ledger sync
+│   │   ├── indeed_scraper.py   # Indeed job scraper & ledger sync
+│   │   ├── naukri_scraper.py   # Naukri job scraper & ledger sync
+│   │   ├── wellfound_scraper.py# Wellfound job scraper & ledger sync
+│   │   └── pending_questions_manager.py # Human-in-the-loop screening question store
 │   ├── agents/                 # LangGraph & CrewAI workflows
 │   │   ├── lead_generator/     # Module 2: Apollo/Hunter + Google Sheets CRM agent
 │   │   ├── resume_tailor/      # Module 3: Markdown & Dual-Engine PDF compiler
 │   │   ├── outreach_drafter/   # Module 4: 3-paragraph Cover Letter & 150-word InMail
 │   │   └── simulator/          # Module 6: Ollama Llama 3 salary counter-offer coach
-│   ├── integrations/           # Apollo, Hunter, Google Sheets, Gmail, Ollama clients
-│   └── api/                    # FastAPI orchestration backend
+│   ├── core/                   # Profile repository, LLM router, logger, env validation
+│   └── integrations/           # Apollo, Hunter, Google Sheets, Gmail API, Ollama clients
+├── tests/                      # Automated test suite (UI, scrapers, engines, verifications)
 ├── Dockerfile.freshness        # Containerized headless Playwright runner
 ├── docker-compose.freshness.yml# Persistent multi-container orchestration
-└── requirements.txt            # Production dependencies
+├── login_bayt_sso.bat          # Desktop SSO launcher for Bayt.com
+├── login_naukri_sso.bat        # Desktop SSO launcher for Naukri.com
+├── start_mobile_orchestrator.bat # Mobile access & Cloudflare Tunnel launcher
+├── requirements.txt            # Production dependencies
+└── tasks.txt                   # Implementation backlog & milestone tracker
 ```
 
 ---
 
 ## 💻 Web Command Center UI Dashboard
 
-A unified, executive single-page web dashboard is served directly via FastAPI to monitor and trigger all 6 modules from a clean visual interface.
+The centralized dashboard is served directly via FastAPI and allows full visual control over all automated workflows.
 
-To start the UI Dashboard:
+### Starting the Dashboard:
 ```bash
+# Windows / PowerShell
+.\.venv\Scripts\python.exe -m uvicorn src.api.main:app --reload --host 127.0.0.1 --port 8000
+
+# macOS / Linux
 python -m uvicorn src.api.main:app --reload --host 127.0.0.1 --port 8000
 ```
-Open your browser at: **`http://127.0.0.1:8000`**
+Open your browser at **`http://127.0.0.1:8000`**.
 
-### UI Dashboard Features:
-- **Command Center:** Live system health, active LLM tier (Ollama / Groq / Gemini), Gulf peak window countdown (10–13 GST), and anchor candidate metrics.
-- **Module 1 (Freshness):** Select portal (Naukri / Bayt), force execution override, and view live screenshot proof.
-- **Module 2 (Leads & CRM):** Scrape company leadership (CTO, VP Eng, Founders) and inspect the live interactive CRM database.
-- **Module 3 (Resume Tailor):** Paste JDs, trigger LangGraph analysis, review the tailored executive summary, and preview or download the generated ATS PDF directly.
-- **Module 4 (Outreach & Gmail):** Preview the 150-word InMail message and 3-paragraph Cover Letter, with one-click saving to Gmail Drafts.
-- **Module 5 (Auto-Apply):** Input job URLs (Workday / Lever / Greenhouse), configure Dubai salary formatters, run safe dry-run previews, and view full-page proof screenshots.
-- **Module 6 (Salary Simulator):** Interactive live chat sparring against the HR Recruiter persona, complete with real-time Executive Coach scorecard and verbatim rebuttal recommendations.
+### Key UI Features:
+1. **Interactive SSO Hub:** View live connection status for Naukri, Bayt, Indeed, Cutshort, and Wellfound. Launch dedicated desktop browser windows with 1 click to refresh authentication cookies.
+2. **Autonomous Multi-Portal Apply Controls:** Select target portals (Naukri, Indeed, Cutshort, Wellfound), choose between **Live Submission** or **Dry Run**, and launch autonomous cycles.
+3. **Application Ledger with Bulk Delete:**
+   - Real-time audit table of all processed applications.
+   - High-resolution proof screenshots captured automatically upon completion or error.
+   - Clean standardized status badges: `applied` (green) and `failed` (red).
+   - Single-row deletion via trash can button.
+   - Multi-select checkboxes with a master "Select All" toggle and dynamic **"Delete Selected (N)"** action button.
+4. **Error Recovery & Deduplication:** One-click `"Retry Failed Applications"` sweeps the ledger, extracts failed or errored entries, and re-runs them with updated parameters.
+5. **Persistent Candidate Profile & Resume Vault:** Upload your active PDF resume with instant drag-and-drop, track file size and upload timestamps, and fine-tune compensation targets for India (LPA) and Dubai (AED).
+6. **Screening Questions HITL Modal:** When scrapers encounter unfamiliar questions (e.g., specific visa questions, GPA, certifications), a modal alerts the user to confirm the answer, immediately unblocking the pipeline and storing the answer for future runs.
 
 ---
 
-## 🚀 Implemented Modules & Usage
+## 📱 Mobile Remote Access & Cloudflare Tunnel
+
+To operate and monitor the orchestrator on your smartphone (iOS / Android) from anywhere in the world without port-forwarding:
+
+```bash
+# Run the mobile orchestrator launcher
+start_mobile_orchestrator.bat
+```
+
+What this does automatically:
+1. Boots the FastAPI backend on `0.0.0.0:8000`.
+2. Establishes an encrypted, authenticated **Cloudflare Tunnel** (`https://<random-id>.trycloudflare.com`).
+3. Prints the public HTTPS URL and renders a scannable **QR Code** directly in your console.
+4. Scan the QR code with your phone's camera to immediately access the dashboard on mobile.
+
+---
+
+## 🚀 Implemented Modules & CLI Commands
 
 ### Module 1: Algorithmic Freshness Cron Job (Naukri & Bayt.com)
-Performs automated daily micro-edits on Naukri.com and Bayt.com to trigger "Recently Updated" algorithmic recruiter search ranking.
+Performs automated daily micro-edits on Naukri.com and Bayt.com to trigger "Recently Updated" recruiter algorithm ranking boosts.
 - **Gulf Timezone Window:** Enforces 10:00 AM – 1:00 PM GST execution for Bayt.
 ```bash
-# Run both platforms
+# Run freshness cycle for all configured portals
 python -m src.automation.freshness_cron --platform all
 
 # Interactive bootstrap (solves OTP/login once and saves cookies to sessions/)
@@ -74,7 +150,7 @@ python -m src.automation.freshness_cron --platform naukri --interactive
 ```
 
 ### Module 2: Lead Generation & CRM Agent (Apollo / Hunter / Google Sheets)
-Scrapes engineering leadership (*CTO, Founder, VP Eng, Head of AI*) at boutique digital transformation agencies (10-50 employees) in Dubai and GCC hubs in Pune.
+Scrapes engineering leadership (*CTO, Founder, VP Eng, Head of AI*) at boutique digital transformation agencies (10-50 employees) in Dubai and GCC enterprise hubs in Pune.
 - Reads target domains from Google Sheets CRM.
 - Syncs contact records to Google Sheets and persists to local backup CSV (`data/leads_crm_backup.csv`).
 ```bash
@@ -86,7 +162,7 @@ python -m src.agents.lead_generator.crm_agent --sync-sheet
 ```
 
 ### Module 3: Dynamic Resume Tailoring Agent (LangGraph + Dual-Engine PDF)
-Analyzes target JDs, classifies technical focus (`multi_agent`, `rag_retrieval`, `network_telemetry`, `conversational_bi`), reorders the 4 anchor projects, and rewrites the executive summary.
+Analyzes target JDs, classifies technical focus (`multi_agent`, `rag_retrieval`, `network_telemetry`, `conversational_bi`), reorders anchor projects, and rewrites the executive summary with quantifiable metrics.
 - **Dual PDF Engine:** Compiles via WeasyPrint or natively via Playwright Headless Chromium (`page.pdf()`).
 ```bash
 # Tailor resume for Dubai benchmark JD
@@ -97,20 +173,18 @@ python -m src.agents.resume_tailor.cli --jd-file ./my_target_jd.txt --company "A
 ```
 
 ### Module 4: Context-Aware Cover Letter & DM Drafter (LangGraph + Gmail API)
-Identifies the core operational bottleneck in the JD, maps it to the user's specific production metrics (e.g. 60% manual review reduction via Contract Redlining), and generates:
+Identifies the core operational bottleneck in the target JD, maps it to the candidate's specific production achievements, and generates:
 1. **Formal 3-Paragraph Cover Letter** for ATS uploads.
 2. **Punchy 150-Word Direct Message** for LinkedIn InMail or Cutshort.
-3. Saves the cold email directly into **Gmail Drafts** (or `.eml` fallback).
+3. Automatically syncs the drafted email directly into your **Gmail Drafts** via the Gmail API.
 ```bash
 python -m src.agents.outreach_drafter.cli --sample dubai --company "Falcon AI" --recipient-name "Tariq Al-Mansoor" --recipient-email "tariq@falconai.ae"
 ```
 
-### Module 5: Multi-Platform Auto-Apply Engine (Playwright)
-Autonomously navigates and completes application forms on **Workday** (using stable `data-automation-id` selectors), **Lever**, and **Greenhouse**.
-- **Dubai Formatter:** Injects local salary expectations (**AED 18,000 – 22,000**) and sets residency to **"Non-Resident / Willing to relocate - Immediately"**.
-- **Standard Details:** Injects Phone (+919922425315), Email, LinkedIn, GitHub, and attaches the latest tailored PDF resume.
-- **Safety Dry-Run:** Fills all fields and captures proof screenshots in `logs/` before submitting.
-- **Fallback Webhook:** Pauses and notifies Discord/Slack if unrecognized questions or anti-bot challenges occur.
+### Module 5: Autonomous Multi-Portal Apply Engine (Playwright)
+Autonomously navigates and completes application forms on **Naukri**, **Indeed**, **Cutshort**, **Wellfound**, **Workday**, **Lever**, and **Greenhouse**.
+- **Gulf & India Formatter:** Automatically adapts compensation (INR vs. AED), notice period ("Serving notice / 30 days"), and relocation status.
+- **Proof Screenshots:** Automatically saved into `logs/screenshots/` with exact timestamped audit trails.
 ```bash
 # Safe dry-run test on application URL
 python -m src.automation.auto_apply_orchestrator --url "https://jobs.lever.co/example/engineer" --location "Dubai, UAE"
@@ -120,16 +194,12 @@ python -m src.automation.auto_apply_orchestrator --url "https://example.myworkda
 ```
 
 ### Module 6: Counter-Offer & Interview Simulator (Ollama + Groq + Gemini)
-Simulates high-stakes compensation negotiations between an ambitious GenAI engineer and demanding HR recruiters in Pune GCCs and Dubai boutique agencies.
-- **Strict Confidentiality Guardrail:** Enforces zero disclosure of the competing 14 LPA offer company name while leveraging it to anchor **18-21+ LPA** (Pune) or **AED 18,000 – 22,000** (Dubai).
-- **Metric-Based Framing:** Evaluates candidate arguments on hard quantifiable impact (*Contract Redlining 60% review reduction, AgentAssist 70% IT incident automation, Network RAG 40% MTTR reduction*).
-- **Tactical Negotiation Coach:** Provides real-time turn-by-turn scorecard (Anchoring, Confidentiality, Value Framing) and verbatim counter-rebuttal scripts.
+Simulates high-stakes compensation negotiations between an ambitious candidate and demanding HR recruiters in Pune GCCs and Dubai boutique agencies.
+- **Strict Confidentiality Guardrail:** Enforces zero disclosure of competing offer details while leveraging them to anchor **18–21+ LPA** (Pune) or **AED 18,000 – 22,000** (Dubai).
+- **Tactical Negotiation Coach:** Provides real-time turn-by-turn scorecard (Anchoring, Confidentiality, Value Framing) and verbatim counter-rebuttal recommendations.
 ```bash
-# Automated tactical benchmark test (Pune GCC)
+# Automated benchmark test (Pune GCC)
 python -m src.agents.simulator.cli --scenario pune_gcc --benchmark
-
-# Automated tactical benchmark test (Dubai Agency)
-python -m src.agents.simulator.cli --scenario dubai_agency --benchmark
 
 # Live interactive conversational negotiation session
 python -m src.agents.simulator.cli --scenario pune_gcc --interactive
@@ -139,17 +209,15 @@ python -m src.agents.simulator.cli --scenario pune_gcc --interactive
 
 ## 🧠 Tiered LLM Failover Architecture
 
-The system operates with an automated 4-tier LLM failover hierarchy across all agentic modules (Resume Tailoring, Outreach Drafting, and Interview Simulation):
-
 ```mermaid
 flowchart TD
-    Req[LLM Request] --> T1[Tier 1: Local Ollama\nLlama 3 / Mistral\nPrivate & Cost-Free]
-    T1 -- Offline / Timeout --> T2[Tier 2: Groq Cloud API\nLlama 3.3 70B / 8B\nUltra-fast 500+ tok/s]
-    T2 -- Unset / Quota Exceeded --> T3[Tier 3: Google Gemini API\nGemini 1.5 / 2.0 Flash\nHigh-capacity reasoning]
-    T3 -- Offline / Unconfigured --> T4[Tier 4: Deterministic Heuristic Engine\nRule-based AST & Guardrails\nZero-crash failover]
+    Req[LLM Generation Request] --> T1[Tier 1: Local Ollama\nLlama 3 / Mistral\nPrivate, Zero-Latency & Free]
+    T1 -- Offline / Timeout --> T2[Tier 2: Groq Cloud API\nLlama 3.3 70B / 8B\nUltra-Fast 500+ tok/s]
+    T2 -- Quota / Rate-Limit --> T3[Tier 3: Google Gemini API\nGemini 1.5 / 2.0 Flash\nHigh-Capacity Reasoning]
+    T3 -- Offline / Unset --> T4[Tier 4: Heuristic AST Engine\nDeterministic Rule-Based Failover\nZero-Crash Guarantee]
 ```
 
-Configure fallback keys in `.env`:
+Configure fallback credentials in your local `.env`:
 ```env
 # Tier 2: Groq Cloud API
 GROQ_API_KEY=gsk_...
@@ -162,14 +230,74 @@ GEMINI_MODEL=gemini-1.5-flash
 
 ---
 
-## 📊 Ground Truth Candidate Profile
-All agents reference [profile_data.json](file:///v:/Development/Job%20Hunt/data/profile_data.json):
-- **Candidate:** GenAI Systems Engineer (3 YOE)
-- **Anchor Projects:**
-  1. *Contract Redlining System* (60% review reduction, BGE Large, BM25, Query Fusion)
-  2. *AgentAssist* (70% IT incident automation, AutoGen GroupChatManager)
-  3. *Network RAG* (~40% MTTR reduction)
-  4. *QueryIQ* (~50% decision speed improvement)
-- **Targets:**
-  - Pune, India: 18 – 21+ LPA
-  - Dubai, UAE: AED 18,000 – 22,000 / month
+## 🧪 Automated Verification Test Suite
+
+The project includes an end-to-end automated test suite covering all critical subsystems:
+
+```bash
+# Run the master verification suite
+python tests/run_all_verifications.py
+```
+
+### Individual Test Suites:
+| Test Script | Validates |
+|---|---|
+| `tests/test_clean_status.py` | Strict status standardization (`applied` and `failed`), eliminating legacy ambiguous statuses |
+| `tests/test_persistent_resume.py` | Resume upload API, storage persistence, and dynamic engine resolution |
+| `tests/test_live_mode.py` | Toggle enforcement between Live Mode submission and Safe Dry Run |
+| `tests/test_error_retry.py` | Ledger error collection, scraper deduplication, and retry execution |
+| `tests/test_portal_sso_ui.py` | SSO Hub cards, portal checkboxes, HTML tree integrity, and Playwright DOM checks |
+| `tests/test_delete_jobs.py` | Single and bulk job ledger deletion REST endpoints |
+| `tests/test_ui_delete_button.py` | UI interaction tests: select-all checkbox, row trash buttons, and dynamic toolbar |
+
+---
+
+## ⚙️ Quickstart & Local Setup
+
+### 1. Clone & Set Up Environment
+```bash
+git clone https://github.com/AneeketDeo/job-hunt.git
+cd job-hunt
+
+# Create virtual environment
+python -m venv .venv
+
+# Activate virtual environment
+# Windows:
+.\.venv\Scripts\activate
+# Linux/macOS:
+source .venv/bin/activate
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Install Playwright browsers
+playwright install chromium
+```
+
+### 2. Configure Environment Variables
+Copy `.env.example` to `.env` and fill in your details:
+```bash
+cp .env.example .env
+```
+
+### 3. Launch the Application
+```bash
+# Start Web Command Center
+python -m uvicorn src.api.main:app --reload --host 127.0.0.1 --port 8000
+```
+Open [http://127.0.0.1:8000](http://127.0.0.1:8000) in your browser.
+
+---
+
+## 🔒 Security & Privacy Practices
+
+- **Zero Secrets Committed:** `.env`, `.pem`, and OAuth client secrets are strictly excluded via `.gitignore`.
+- **Session Privacy:** Local browser session state (`sessions/*.json`) containing cookies and tokens is never tracked.
+- **Safe Public Templates:** [data/candidate_profile.example.json](file:///v:/Development/Job%20Hunt/data/candidate_profile.example.json) provides a clean template structure while keeping personal credentials and runtime ledgers private.
+- **Fail-Safe Dry Run:** Application testing defaults to dry-run mode with screenshot capture to prevent accidental submissions.
+
+---
+
+## 📄 License
+This project is open-source under the [MIT License](LICENSE).
