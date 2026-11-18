@@ -1,0 +1,40 @@
+# Use official Playwright Python base image with pre-installed browsers & OS dependencies
+FROM mcr.microsoft.com/playwright/python:v1.49.0-noble
+
+# Set timezone and environment variables
+ENV PYTHONUNBUFFERED=1 \
+    DEBIAN_FRONTEND=noninteractive \
+    TZ=Asia/Dubai \
+    HEADLESS=true
+
+WORKDIR /app
+
+# Install system utilities and timezone data
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    tzdata \
+    ca-certificates \
+    curl \
+    && ln -fs /usr/share/zoneinfo/$TZ /etc/localtime \
+    && dpkg-reconfigure --frontend noninteractive tzdata \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Python dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
+
+# Ensure Playwright browser binaries are present
+RUN playwright install chromium
+
+# Copy application source code
+COPY config/ ./config/
+COPY data/ ./data/
+COPY src/ ./src/
+
+# Create persistent storage mountpoints
+RUN mkdir -p /app/sessions /app/logs /app/data/chroma_db
+
+# Default command runs the freshness cron in daemon mode
+ENTRYPOINT ["python", "-m", "src.automation.freshness_cron"]
+CMD ["--platform", "all", "--daemon"]

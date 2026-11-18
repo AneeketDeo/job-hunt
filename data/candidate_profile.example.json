@@ -1,0 +1,101 @@
+{
+  "personal": {
+    "full_name": "Candidate Name",
+    "email": "candidate@example.com",
+    "phone": "+1234567890",
+    "headline": "Senior GenAI Systems Engineer & Autonomous Agent Architect",
+    "current_location": "San Francisco, CA",
+    "target_locations": [
+      "San Francisco, CA",
+      "Remote"
+    ],
+    "years_of_experience": 4,
+    "relevant_experience_years": 4,
+    "notice_period": "30 days",
+    "notice_period_days": 30,
+    "serving_notice_period": false,
+    "last_working_day": "Immediate",
+    "gender": "Prefer not to say",
+    "marital_status": "Single",
+    "address": "San Francisco, CA, USA",
+    "pin_code": "94105",
+    "country": "USA",
+    "citizenship": "US Citizen",
+    "valid_passport": true
+  },
+  "credentials": {
+    "standard_email": "candidate@example.com",
+    "standard_password": "YourSecurePasswordHere"
+  },
+  "urls": {
+    "linkedin": "https://www.linkedin.com/in/candidate",
+    "github": "https://github.com/candidate",
+    "portfolio": "https://candidate.dev"
+  },
+  "compensation": {
+    "currency_india": "INR",
+    "current_ctc_lpa": 14,
+    "expected_ctc_min_lpa": 20,
+    "expected_ctc_ideal_lpa": 25,
+    "current_offer_lpa": 14,
+    "currency_uae": "AED",
+    "dubai_expected_aed_monthly": 20000,
+    "dubai_min_aed_monthly": 18000,
+    "is_negotiable": true
+  },
+  "education": {
+    "degree": "Bachelor of Science in Computer Science",
+    "university": "State University",
+    "graduation_year": 2021,
+    "gpa_or_percentage": "3.8 GPA"
+  },
+  "experience": {
+    "current_company": "AI Enterprise Systems",
+    "current_designation": "AI Systems Engineer",
+    "experience_years": 4,
+    "industry": "Artificial Intelligence / Software Development"
+  },
+  "skills": [
+    "Python",
+    "LangGraph",
+    "CrewAI",
+    "FastAPI",
+    "ChromaDB",
+    "BGE Large",
+    "BM25",
+    "Hybrid Retrieval",
+    "Playwright",
+    "Docker",
+    "PostgreSQL",
+    "Redis",
+    "SQL",
+    "RAG Pipelines",
+    "Agentic Systems",
+    "Prompt Engineering"
+  ],
+  "preferences": {
+    "target_roles": [
+      "GenAI Engineer",
+      "Autonomous Agent Architect",
+      "LLM Systems Engineer"
+    ],
+    "target_locations": [
+      "Pune, India",
+      "Dubai, UAE",
+      "Remote"
+    ],
+    "work_modes": [
+      "Hybrid",
+      "Remote",
+      "On-site"
+    ],
+    "excluded_companies": [
+      "Revature",
+      "Infosys",
+      "Wipro",
+      "TCS",
+      "Cognizant",
+      "HCLTech"
+    ]
+  }
+}

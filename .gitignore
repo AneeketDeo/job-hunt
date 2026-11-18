@@ -1,0 +1,80 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Secrets & Environment
+.env
+*.pem
+*.key
+google_service_account.json
+gmail_client_secret.json
+token.json
+
+# Session storage & cookies (DO NOT COMMIT AUTH STATES)
+sessions/*.json
+!sessions/.gitkeep
+
+# Playwright & Browser Artifacts
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
+screenshots/
+*.png
+
+# Vector DB, Local Storage & Runtime Artifacts
+data/chroma_db/
+data/generated_resumes/
+data/drafts/
+data/mobile_access.txt
+data/resumes/*.pdf
+!data/resumes/.gitkeep
+
+# Candidate Personal Data & Runtime Ledgers
+data/candidate_profile.json
+data/profile_data.json
+data/applied_jobs.json
+data/indeed_applied_jobs.json
+data/cron_history.json
+data/pending_questions.json
+
+# Logs & Screenshots
+logs/*.log
+logs/screenshots/
+logs/reports/
+!logs/.gitkeep
+
+# Large Binaries & Tools
+tools/*.exe
+tools/cloudflared*
+
+# CRM & Local Data Backups
+data/leads_crm_backup.csv
+data/mobile_qr.png
+
+# IDEs
+.idea/
+.vscode/
+*.swp
+*.swo

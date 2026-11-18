@@ -1,0 +1,7 @@
+1. path 3 not working cvorrectly it just visits the job posting page but doesn't apply to the job and then follow thorugh the entire job application pro ess of uloading resume filling out the details and finally submitting the job application.
+2. it says indeed sso worked but cant see any proof, after running just for indeed it was not able to scrape even a single record, something fishy
+3. indeed, wellfound and cutshort sso nothing has eworked due to the edge not able tto lnauch but it said that edge is launched and now loging to save the cookies but it never launched.
+
+4. update the filters accrodgin to the changes we made int he dashbaoprd now
+5. make sure the filter works when i select Naukri or cutshort or indeed or weelfound.
+6. implement the path 3 entreily test it and store the results. 
